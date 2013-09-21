@@ -49,7 +49,7 @@
 			// GeoJSON is stored inside a file, fetch data using Ajax-request.
 			$.ajax({
 			    type: "POST",
-			    url: "http://opendata.lounaispaikka.fi/datasets/turun_kaupunki/epsg4326_konversiot/aluejaot/geojson/Kaupunginosat_09_2010_epsg4326.geojson",
+			    url: "http://http://users.utu.fi/faalsu/archipelago_building_cluster_grid.geojson",
 			    dataType: 'json',
 			    success: function (response) {
 				geojsonLayer = L.geoJson(response, {
@@ -61,8 +61,8 @@
 			
 			// Adds name of the area as popup
 			function displayName(feature, layer){
-			    if (feature.properties.Teksti) {
-				layer.bindPopup(feature.properties.Teksti);
+			    if (feature.properties.L_perc) {
+				layer.bindPopup(feature.properties.L_perc);
 			    }
 			}
 		}
