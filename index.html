@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Hackathon - GeoJSON DEMO</title>
+	<title>Tulevaisuuden paikkatietosovellus</title>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
@@ -35,7 +35,7 @@
 			var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 20, attribution: osmAttrib});
 			
 			// Set coordinates and zoom for the map view
-			map.setView(new L.LatLng(60.457218, 22.256584),12);
+			map.setView(new L.LatLng(60.1395, 22.3160),10);
 			
 			// Add OSM-baselayer
 			map.addLayer(osm);
@@ -53,7 +53,55 @@
 			    dataType: 'json',
 			    success: function (response) {
 				geojsonLayer = L.geoJson(response, {
-				    style: datalayer_style,
+	//			    style: datalayer_style,
+					style: function (feature) {
+						//console.log(feature.properties.L_perc);
+						switch(true)
+							{
+							case feature.properties.L_perc <= 0:
+								return	{
+									"color": "#FFFFFF",
+									"weight": 0,
+									"opacity": 1
+								};
+								break;
+							case feature.properties.L_perc <= 25 :
+								return	{
+									"color": "#336600",
+									"weight": 0,
+									"opacity": 0.8
+								};
+								break;
+							case feature.properties.L_perc <= 50 :
+								console.log("testi");
+								return	{
+									"color": "#660099",
+									"weight": 0,
+									"opacity": 0.8
+								};
+								break;	
+							case feature.properties.L_perc <= 75 :
+								return	{
+									"color": "#330066",
+									"weight": 0,
+									"opacity": 0.8
+								};
+								break;	
+							case feature.properties.L_perc <= 100 :
+								return	{
+									"color": "#9A00FF",
+									"weight": 0,
+									"opacity": 0.8
+								};
+								break;	
+							default:
+								return	{
+									"color": "#ff0000",
+									"weight": 0,
+									"opacity": 0.0
+								};
+							}
+					},
 				    onEachFeature: displayName // Bind popup to feature
 				}).addTo(map);
 			    }
