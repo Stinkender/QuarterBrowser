@@ -46,6 +46,11 @@
 			    "opacity": 0.65
 			};
 			
+			// Add WMS layer, hosted at kartat.lounaispaikka.fi
+			var services = L.tileLayer.wms("http://kartat.lounaispaikka.fi/wms/varsinaissuomenpalvelut2013", { 
+				layers: 'varsinaissuomenpalvelut2013',                   
+				format: 'image/png',                            transparent: true,                            attribution: "Palveluaineisto © 2013 Lounaispaikka"                        });
+			
 			// GeoJSON is stored inside a file, fetch data using Ajax-request.
 			$.ajax({
 			    type: "POST",
