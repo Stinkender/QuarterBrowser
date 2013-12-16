@@ -54,57 +54,12 @@
 			    success: function (response) {
 				geojsonLayer = L.geoJson(response, {
 	//			    style: datalayer_style,
-					style: function (feature) {
-						//console.log(feature.properties.L_perc);
-						switch(true)
-							{
-							case feature.properties.L_perc <= 0:
-								return	{
-									"color": "#FFFFFF",
-									"weight": 0,
-									"opacity": 1
-								};
-								break;
-							case feature.properties.L_perc <= 10 :
-								return	{
-									"color": "#336600",
-									"weight": 0,
-									"opacity": 0.8
-								};
-								break;
-							case feature.properties.L_perc <= 20 :
-								console.log("testi");
-								return	{
-									"color": "#660099",
-									"weight": 0,
-									"opacity": 0.8
-								};
-								break;	
-							case feature.properties.L_perc <= 30 :
-								return	{
-									"color": "#330066",
-									"weight": 0,
-									"opacity": 0.8
-								};
-								break;	
-							case feature.properties.L_perc <= 40 :
-								return	{
-									"color": "#9A00FF",
-									"weight": 0,
-									"opacity": 0.8
-								};
-								break;	
-							default:
-								return	{
-									"color": "#ff0000",
-									"weight": 0,
-									"opacity": 0.0
-								};
-							}
-					},
-				    onEachFeature: displayName // Bind popup to feature
-				}).addTo(map);
-			    }
+					success: function (response) {
+						geojsonLayer = L.geoJson(response, {
+							style: datalayer_style,     
+							onEachFeature: displayName // Bind popup to feature 
+						}).addTo(map);                 
+					}
 			});
 			
 			// Adds name of the area as popup
